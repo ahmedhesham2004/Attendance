@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="wwwroot\AreaImages\**" />
+      <Compile Remove="wwwroot\PrivateTransports\**" />
+      <Compile Remove="wwwroot\PublicTransportmages\**" />
+      <Content Remove="wwwroot\AreaImages\**" />
+      <Content Remove="wwwroot\PrivateTransports\**" />
+      <Content Remove="wwwroot\PublicTransportmages\**" />
+      <EmbeddedResource Remove="wwwroot\AreaImages\**" />
+      <EmbeddedResource Remove="wwwroot\PrivateTransports\**" />
+      <EmbeddedResource Remove="wwwroot\PublicTransportmages\**" />
+      <None Remove="wwwroot\AreaImages\**" />
+      <None Remove="wwwroot\PrivateTransports\**" />
+      <None Remove="wwwroot\PublicTransportmages\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="9.0.4" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.1">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Scalar.AspNetCore" Version="2.0.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="appsettings.Development.json">
+        <DependentUpon>appsettings.json</DependentUpon>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Base.Application\Base.Application.csproj" />
+      <ProjectReference Include="..\Base.Domain\Base.Domain.csproj" />
+      <ProjectReference Include="..\Base.Infrastructure\Base.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>
