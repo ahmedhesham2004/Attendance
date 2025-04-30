@@ -15,10 +15,9 @@ public class StudentService(ApplicationDbContext context, UserManager<Applicatio
         if (!isExstingLevelId)
             return Result.Failure<AddStudentResponse>(LevelError.NotFound);
 
-        //DepartmentError
         var isExstingDepartmentId = await _context.Departments.AnyAsync(x => x.Id == request.DepartmentId);
         if (!isExstingDepartmentId)
-            return Result.Failure<AddStudentResponse>(LevelError.NotFound);
+            return Result.Failure<AddStudentResponse>(DepartmentError.NotFound);
 
         var UserIdUsed = await _context.Students.AnyAsync(x => x.ApplicationUserId == request.ApplicationUserId);
         if (UserIdUsed)
@@ -73,10 +72,9 @@ public class StudentService(ApplicationDbContext context, UserManager<Applicatio
         if (!isExstingLevelId)
             return Result.Failure<AddStudentResponse>(LevelError.NotFound);
 
-        //DepartmentError
         var isExstingDepartmentId = await _context.Departments.AnyAsync(x => x.Id == request.DepartmentId);
         if (!isExstingDepartmentId)
-            return Result.Failure<AddStudentResponse>(LevelError.NotFound);
+            return Result.Failure<AddStudentResponse>(DepartmentError.NotFound);
 
         var UserIdUsed = await _context.Students.AnyAsync(x => x.ApplicationUserId == request.ApplicationUserId && x.Id != studentId);
         if (UserIdUsed)
