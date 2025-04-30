@@ -12,3 +12,9 @@ public class StudentResponse
     public StudentLevelResponse Level { get; set; }
     public ICollection<Attendence> Attendences { get; set; }
 }
+
+public class StudentResponse2
+{
+    public int Id { get; set; }
+    public UserProfileResponse ApplicationUser { get; set; }
+}
