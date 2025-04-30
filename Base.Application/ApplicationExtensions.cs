@@ -45,6 +45,7 @@ public static class ApplicationExtensions
         services.AddScoped<IDepartmentService, DepartmentService>();
         services.AddScoped<IDoctorService, DoctorService>();
         services.AddScoped<IAttendenceService, AttendenceService>();
+        services.AddScoped<ISubjectService, SubjectService>();
 
 
         return services;
