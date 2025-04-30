@@ -9,7 +9,7 @@ public class Student
     public ApplicationUser ApplicationUser { get; set; } = null!;
 
 
-    public NFC_Card NFC_Card { get; set; } = null!;
+    public NFC_Card? NFC_Card { get; set; }
 
     public int DepartmentId { get; set; }
     public Department Department { get; set; } = null!;
