@@ -11,7 +11,7 @@ public class Lecture
 
 
     public int SubjectId { get; set; }
-    public Subject Subject { get; set; }
+    public Subject Subject { get; set; } = null!;
 
     public ICollection<Attendence> Attendences { get; set; }
 }

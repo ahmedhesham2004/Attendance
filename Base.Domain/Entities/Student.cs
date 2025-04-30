@@ -5,11 +5,10 @@ public class Student
 {
     public int Id { get; set; }
 
-    public int ApplicationUserId { get; set; }
-    public ApplicationUser ApplicationUser { get; set; }
+    public string ApplicationUserId { get; set; }
+    public ApplicationUser ApplicationUser { get; set; } = null!;
 
-    
-    public int NFC_CardId { get; set; }
+
     public NFC_Card NFC_Card { get; set; } = null!;
 
     public int DepartmentId { get; set; }

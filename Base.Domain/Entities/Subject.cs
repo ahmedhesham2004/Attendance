@@ -9,7 +9,7 @@ public class Subject
     public int Samester { get; set; }
 
     public int DoctorId { get; set; }
-    public Doctor Doctor { get; set; }
+    public Doctor Doctor { get; set; } = null!;
 
     public int DepartmentId { get; set; }
     public Department Department { get; set; } = null!;

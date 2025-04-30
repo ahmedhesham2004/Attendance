@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Base.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class IntialDataBase : Migration
+    public partial class intialDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -195,15 +195,14 @@ namespace Base.Infrastructure.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ApplicationUserId = table.Column<int>(type: "int", nullable: false),
-                    ApplicationUserId1 = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Doctors", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Doctors_AspNetUsers_ApplicationUserId1",
-                        column: x => x.ApplicationUserId1,
+                        name: "FK_Doctors_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -215,8 +214,7 @@ namespace Base.Infrastructure.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ApplicationUserId = table.Column<int>(type: "int", nullable: false),
-                    ApplicationUserId1 = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     NFC_CardId = table.Column<int>(type: "int", nullable: false),
                     DepartmentId = table.Column<int>(type: "int", nullable: false),
                     LevelId = table.Column<int>(type: "int", nullable: false)
@@ -225,8 +223,8 @@ namespace Base.Infrastructure.Data.Migrations
                 {
                     table.PrimaryKey("PK_Students", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Students_AspNetUsers_ApplicationUserId1",
-                        column: x => x.ApplicationUserId1,
+                        name: "FK_Students_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -403,9 +401,9 @@ namespace Base.Infrastructure.Data.Migrations
                 column: "LectureId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Doctors_ApplicationUserId1",
+                name: "IX_Doctors_ApplicationUserId",
                 table: "Doctors",
-                column: "ApplicationUserId1");
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Lectures_SubjectId",
@@ -419,9 +417,9 @@ namespace Base.Infrastructure.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_ApplicationUserId1",
+                name: "IX_Students_ApplicationUserId",
                 table: "Students",
-                column: "ApplicationUserId1");
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Students_DepartmentId",

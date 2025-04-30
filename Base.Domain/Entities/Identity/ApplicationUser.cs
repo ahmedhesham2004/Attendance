@@ -10,4 +10,7 @@ public class ApplicationUser : IdentityUser
     public string? NationalId { get; set; }
     public string ImageUrl { get; set; } = null!;
 
+    public ICollection<Student> Students { get; set; }
+    public ICollection<Doctor> Doctors { get; set; }
+
 }

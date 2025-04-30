@@ -39,6 +39,8 @@ public static class ApplicationExtensions
         services.AddScoped<IFileService, FileService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IRoleService, RoleService>();
+        services.AddScoped<ILevelService, LevelService>();
+        services.AddScoped<INfc_CardService, Nfc_CardService>();
 
 
         return services;
