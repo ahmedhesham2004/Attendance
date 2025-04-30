@@ -57,7 +57,8 @@ public class Nfc_CardService(IWebHostEnvironment webHostEnvironment, Application
     }
     public async Task<Result> UpdateAsync(int id, Nfc_CardRequest request)
     {
-        if (await _Context.NFC_Cards.FindAsync(id) is not { } level)
+        var card = await _Context.NFC_Cards.FindAsync(id);
+        if (card is null)
             return Result.Failure<Nfc_CardResponse>(Nfc_CardError.NotFound);
 
         string filename = request.ImageUrl.FileName;
@@ -67,8 +68,8 @@ public class Nfc_CardService(IWebHostEnvironment webHostEnvironment, Application
             await request.ImageUrl.CopyToAsync(stream);
         }
 
-        var nfc = request.Adapt<NFC_Card>();
-        nfc.ImageUrl = $"images/{filename}";
+        card= request.Adapt(card);
+        card.ImageUrl = $"images/{filename}";
 
         await _Context.SaveChangesAsync();
 
