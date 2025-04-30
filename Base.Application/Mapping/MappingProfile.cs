@@ -1,4 +1,5 @@
 using Base.Application.Contracts.Nfc_Cards;
+using Base.Application.Contracts.Students;
 using Base.Application.Contracts.Users;
 
 namespace Base.Application.Mapping;
@@ -15,5 +16,8 @@ public class MappingProfile : IRegister
 
         config.NewConfig<Nfc_CardRequest, NFC_Card>()
          .Ignore(dest=>dest.ImageUrl);
+
+        config.NewConfig<Student, StudentResponse>()
+          .Map(des => des.nfc, src => src.NFC_Card != null ? src.NFC_Card : null);
     }
 }
