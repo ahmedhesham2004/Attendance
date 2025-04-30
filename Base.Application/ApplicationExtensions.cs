@@ -42,6 +42,7 @@ public static class ApplicationExtensions
         services.AddScoped<ILevelService, LevelService>();
         services.AddScoped<INfc_CardService, Nfc_CardService>();
         services.AddScoped<IDepartmentService, DepartmentService>();
+        services.AddScoped<IDoctorService, DoctorService>();
 
 
         return services;
