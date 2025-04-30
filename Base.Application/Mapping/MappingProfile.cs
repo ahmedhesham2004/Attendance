@@ -18,6 +18,6 @@ public class MappingProfile : IRegister
          .Ignore(dest=>dest.ImageUrl);
 
         config.NewConfig<Student, StudentResponse>()
-          .Map(des => des.nfc, src => src.NFC_Card != null ? src.NFC_Card : null);
+          .Map(des => des.nfc, src => src.NFC_Card ?? null);
     }
 }
