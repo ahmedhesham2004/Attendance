@@ -4,6 +4,7 @@ using Base.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Base.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250501180452_AddDataInDoctorTable")]
+    partial class AddDataInDoctorTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1661,81 +1664,6 @@ namespace Base.Infrastructure.Data.Migrations
                         {
                             UserId = "e4b2f91d-9e12-4f4a-b3db-1b58fca15e66",
                             RoleId = "0191d311-2918-7f76-bd8a-0bded8535075"
-                        },
-                        new
-                        {
-                            UserId = "10eb7637-95f4-45d2-b200-84dbb188ec41",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adff9"
-                        },
-                        new
-                        {
-                            UserId = "357c8ce0-ed6e-4979-b1f9-5e0f6e90c9a1",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adff9"
-                        },
-                        new
-                        {
-                            UserId = "a0e2f1e7-53e5-416f-b0b0-ca4668563233",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adff9"
-                        },
-                        new
-                        {
-                            UserId = "52511e3a-0690-45b0-9e52-02667a473b18",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adff9"
-                        },
-                        new
-                        {
-                            UserId = "52511e3a-0690-45b0-9e52-02667a473c23",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adff9"
-                        },
-                        new
-                        {
-                            UserId = "u12vw34x-5y6z-7a8b-9c0d-1e2f3g4h5i6j",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adff9"
-                        },
-                        new
-                        {
-                            UserId = "v23wx45y-6z7a-8b9c-0d1e-2f3g4h5i6j7k",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adff9"
-                        },
-                        new
-                        {
-                            UserId = "w34xy56z-7a8b-9c0d-1e2f-3g4h5i6j7k8l",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adff9"
-                        },
-                        new
-                        {
-                            UserId = "x45yz67a-8b9c-0d1e-2f3g-4h5i6j7k8l9m",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adff9"
-                        },
-                        new
-                        {
-                            UserId = "y56za78b-9c0d-1e2f-3g4h-5i6j7k8l9m0n",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adff9"
-                        },
-                        new
-                        {
-                            UserId = "z67ab89c-0d1e-2f3g-4h5i-6j7k8l9m0n1o",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adff9"
-                        },
-                        new
-                        {
-                            UserId = "a78bc90d-1e2f-3g4h-5i6j-7k8l9m0n1o2p",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adff9"
-                        },
-                        new
-                        {
-                            UserId = "b89cd01e-2f3g-4h5i-6j7k-8l9m0n1o2p3q",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adff9"
-                        },
-                        new
-                        {
-                            UserId = "c90de12f-3g4h-5i6j-7k8l-9m0n1o2p3q4r",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adff9"
-                        },
-                        new
-                        {
-                            UserId = "d01ef23g-4h5i-6j7k-8l9m-0n1o2p3q4r5s",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adff9"
                         });
                 });
 
