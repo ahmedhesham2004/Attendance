@@ -33,6 +33,26 @@ public class StudentService(ApplicationDbContext context, UserManager<Applicatio
         await _context.AddAsync(student);
         await _context.SaveChangesAsync();
 
+        var subjects = await _context.Subjects.ToListAsync();
+        var attendences = new List<Attendence>();
+        
+        foreach (var subject in subjects)
+        {
+            if (student.LevelId == subject.LevelId &&
+                student.DepartmentId == subject.DepartmentId)
+            {
+                attendences.Add(new Attendence
+                {
+                    StudentId = student.Id,
+                    SubjectId = subject.Id,
+                    Count = 0
+                });
+            }
+        }
+
+        await _context.Attendences.AddRangeAsync(attendences);
+        await _context.SaveChangesAsync();
+
 
         return Result.Success(student.Adapt<AddStudentResponse>());
     }
