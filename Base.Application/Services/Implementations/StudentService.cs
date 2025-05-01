@@ -26,7 +26,7 @@ public class StudentService(ApplicationDbContext context, UserManager<Applicatio
         var student = request.Adapt<Student>();
 
         var user = await _userManager.FindByIdAsync(request.ApplicationUserId);
-        _userManager.AddToRoleAsync(user, "User").Wait();
+        _userManager.AddToRoleAsync(user, "Student").Wait();
 
         await _context.AddAsync(student);
         await _context.SaveChangesAsync();
@@ -96,6 +96,10 @@ public class StudentService(ApplicationDbContext context, UserManager<Applicatio
         var isExstingStudent = await _context.Students.AnyAsync(x => x.Id == studentId);
         if (!isExstingStudent)
             return Result.Failure(StudentErrors.StudentNotFound);
+
+
+        var user = await _userManager.FindByIdAsync(await _context.Students.Where(x => x.Id == studentId).Select(x => x.ApplicationUserId).FirstAsync());
+        _userManager.RemoveFromRoleAsync(user, "Student").Wait();
 
         _context.Students.Remove(new Student { Id = studentId });
         await _context.SaveChangesAsync();

@@ -1,9 +1,12 @@
 ﻿using Base.Application.Contracts.Doctor;
 using Base.Application.Contracts.Nfc_Cards;
 using Base.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using static Base.Domain.Consts.DefaultRoles;
 
 namespace Base.Application.Services.Implementations;
-public class DoctorService(ApplicationDbContext context) : IDoctorService
+public class DoctorService(ApplicationDbContext context, UserManager<ApplicationUser> _userManager) : IDoctorService
 {
     private readonly ApplicationDbContext _Context = context;
 
@@ -26,7 +29,10 @@ public class DoctorService(ApplicationDbContext context) : IDoctorService
     {
         if (await _Context.Doctors.AnyAsync(x => x.ApplicationUserId == request.ApplicationUserId))
             return Result.Failure<DoctorResponse>(DoctorError.Dublicated);
-        var doc = request.Adapt<Doctor>();
+        var doc = request.Adapt<Domain.Entities.Doctor>();
+
+        var user = await _userManager.FindByIdAsync(request.ApplicationUserId);
+        _userManager.AddToRoleAsync(user, "Doctor").Wait();
 
         await _Context.Doctors.AddAsync(doc);
         await _Context.SaveChangesAsync();
@@ -48,6 +54,9 @@ public class DoctorService(ApplicationDbContext context) : IDoctorService
     {
         if (await _Context.Doctors.FindAsync(id) is not  { } doc)
             return Result.Failure<DoctorResponse>(DoctorError.NotFound);
+
+        var user = await _userManager.FindByIdAsync(await _Context.Doctors.Where(x => x.Id == id).Select(x => x.ApplicationUserId).FirstAsync());
+        _userManager.RemoveFromRoleAsync(user, "Doctor").Wait();
 
         _Context.Doctors.Remove(doc);
         await _Context.SaveChangesAsync();

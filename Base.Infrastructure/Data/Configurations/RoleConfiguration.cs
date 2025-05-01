@@ -21,6 +21,18 @@ public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
                 Name = DefaultRoles.User.Name,
                 NormalizedName = DefaultRoles.User.Name.ToUpper(),
                 ConcurrencyStamp = DefaultRoles.User.ConcurrencyStamp,
+            },
+            new IdentityRole(){
+                Id = DefaultRoles.Student.Id,
+                Name = DefaultRoles.Student.Name,
+                NormalizedName = DefaultRoles.Student.Name.ToUpper(),
+                ConcurrencyStamp = DefaultRoles.Student.ConcurrencyStamp,
+            },
+            new IdentityRole(){
+                Id = DefaultRoles.Doctor.Id,
+                Name = DefaultRoles.Doctor.Name,
+                NormalizedName = DefaultRoles.Doctor.Name.ToUpper(),
+                ConcurrencyStamp = DefaultRoles.Doctor.ConcurrencyStamp,
             }
         ]);
     }

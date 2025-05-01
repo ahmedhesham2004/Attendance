@@ -3,6 +3,7 @@ using Base.Application.Contracts.Department;
 using Base.Application.Contracts.Levels;
 using Base.Application.Contracts.Nfc_Cards;
 using Base.Application.Contracts.Students;
+using Base.Application.Contracts.Subjects;
 using Base.Application.Contracts.Users;
 
 namespace Base.Application.Mapping;
@@ -40,6 +41,11 @@ public class MappingProfile : IRegister
         config.NewConfig<Department, DepartmentResponse>()
           .Map(des => des.StudentsName, src => src.Students.Select(x => $"{x.ApplicationUser.FirstName} {x.ApplicationUser.LastName}"))
           .Map(des => des.SubjectsName, src => src.Subjects.Select(x => x.Name));
+
+        config.NewConfig<Subject, SubjectResponse>()
+          .Map(des => des.LevelName, src => src.Level.Name)
+          .Map(des => des.DepartmentName, src => src.Department.Name)
+          .Map(des => des.DoctorName, src => src.Doctor.ApplicationUser.FirstName + ' ' + src.Doctor.ApplicationUser.LastName);
 
     }
 }

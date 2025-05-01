@@ -17,4 +17,18 @@ public static class DefaultRoles
         public const string ConcurrencyStamp = "0191d311-2918-7f76-bd8a-0be100f11384";
     }
 
+    public partial class Doctor
+    {
+        public const string Name = nameof(Doctor);
+        public const string Id = "0191d311-2918-7f76-bd8a-0bdf740adff9";
+        public const string ConcurrencyStamp = "0191d311-2918-7f76-bd8a-0bdf740adff9";
+    }
+
+    public partial class Student
+    {
+        public const string Name = nameof(Student);
+        public const string Id = "0191d311-2918-7f76-bd8a-0bdf740adfA9";
+        public const string ConcurrencyStamp = "0191d311-2918-7f76-bd8a-0bdf740adfA9";
+    }
+
 }
