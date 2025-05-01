@@ -1,4 +1,6 @@
 ﻿using Base.Application.Contracts.Students;
+using static Base.Domain.Consts.DefaultRoles;
+using Student = Base.Domain.Entities.Student;
 
 namespace Base.Application.Services.Implementations;
 public class StudentService(ApplicationDbContext context, UserManager<ApplicationUser> _userManager) : IStudentService
@@ -61,6 +63,12 @@ public class StudentService(ApplicationDbContext context, UserManager<Applicatio
             .ProjectToType<StudentResponse>()
             .AsNoTracking()
             .FirstOrDefaultAsync();
+
+        if (student is not null)
+        {
+            var role = await _userManager.GetRolesAsync(await _context.ApplicationUsers.Where(x => x.Id == userId).FirstAsync());
+            student.ApplicationUser.Role = role;
+        }  
 
         return student is null ? Result.Failure<StudentResponse>(StudentErrors.StudentNotFound) : Result.Success(student);
     }

@@ -21,6 +21,13 @@ public class DoctorService(ApplicationDbContext context, UserManager<Application
     {
         var id = await _Context.Doctors.Where(x => x.ApplicationUserId == userId).Select(x => x.Id).FirstOrDefaultAsync();
         var doc = await _Context.Doctors.Where(x=>x.Id==id).Include(x => x.ApplicationUser).AsNoTracking().ProjectToType<DoctorResponse>().FirstOrDefaultAsync();
+
+        if (doc is not null)
+        {
+            var role = await _userManager.GetRolesAsync(await _Context.ApplicationUsers.Where(x => x.Id == userId).FirstAsync());
+            doc.ApplicationUser.Roles = role;
+        }
+
         return doc is null
            ? Result.Failure<DoctorResponse>(DoctorError.NotFound)
            : Result.Success(doc);
