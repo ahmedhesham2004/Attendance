@@ -14,8 +14,9 @@ public class DoctorService(ApplicationDbContext context) : IDoctorService
         return Result.Success(doctors);
     }
 
-    public async Task<Result<DoctorResponse>> GetAsync(int id)
+    public async Task<Result<DoctorResponse>> GetAsync(string userId)
     {
+        var id = await _Context.Doctors.Where(x => x.ApplicationUserId == userId).Select(x => x.Id).FirstOrDefaultAsync();
         var doc = await _Context.Doctors.Where(x=>x.Id==id).Include(x => x.ApplicationUser).AsNoTracking().ProjectToType<DoctorResponse>().FirstOrDefaultAsync();
         return doc is null
            ? Result.Failure<DoctorResponse>(DoctorError.NotFound)

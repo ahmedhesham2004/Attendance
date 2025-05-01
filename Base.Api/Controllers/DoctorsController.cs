@@ -21,12 +21,12 @@ public class DoctorsController(IDoctorService doctorService) : ControllerBase
 
         return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
     }
-    [HttpGet("{id}")]
+    [HttpGet("")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Get(int id)
+    public async Task<IActionResult> Get()
     {
-        var result = await _DoctorService.GetAsync(id);
+        var result = await _DoctorService.GetAsync(User.GetUserId());
 
         return result.IsSuccess
             ? Ok(result.Value)

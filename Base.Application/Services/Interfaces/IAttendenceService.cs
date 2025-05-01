@@ -3,6 +3,8 @@
 namespace Base.Application.Services.Interfaces;
 public interface IAttendenceService
 {
-    Task<IEnumerable<StudentAttendenceResponse>> GetAllAsync();
+
+    Task<IEnumerable<AttendenceResponse>> GetAllAsync();
+    //Task<Result<ICollection<SubjectAttendenceResponse>>> GetSubjectAttendenceAsync(int subjectId);
     
 }

@@ -27,14 +27,17 @@ namespace Base.Infrastructure.Data.Migrations
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LectureId")
+                    b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
-                    b.HasKey("StudentId", "LectureId");
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
 
-                    b.HasIndex("LectureId");
+                    b.HasKey("StudentId", "SubjectId");
 
-                    b.ToTable("Attendences", (string)null);
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Attendences");
                 });
 
             modelBuilder.Entity("Base.Domain.Entities.Department", b =>
@@ -51,7 +54,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments", (string)null);
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("Base.Domain.Entities.Doctor", b =>
@@ -70,7 +73,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Doctors", (string)null);
+                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("Base.Domain.Entities.Identity.ApplicationUser", b =>
@@ -184,35 +187,6 @@ namespace Base.Infrastructure.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Base.Domain.Entities.Lecture", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Lecturedate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("Lectures", (string)null);
-                });
-
             modelBuilder.Entity("Base.Domain.Entities.Level", b =>
                 {
                     b.Property<int>("Id")
@@ -227,7 +201,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Levels", (string)null);
+                    b.ToTable("Levels");
                 });
 
             modelBuilder.Entity("Base.Domain.Entities.NFC_Card", b =>
@@ -254,7 +228,7 @@ namespace Base.Infrastructure.Data.Migrations
                     b.HasIndex("StudentId")
                         .IsUnique();
 
-                    b.ToTable("NFC_Cards", (string)null);
+                    b.ToTable("NFC_Cards");
                 });
 
             modelBuilder.Entity("Base.Domain.Entities.Student", b =>
@@ -283,7 +257,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasIndex("LevelId");
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("Base.Domain.Entities.Subject", b =>
@@ -300,6 +274,9 @@ namespace Base.Infrastructure.Data.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
+                    b.Property<int>("LevelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -313,7 +290,9 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("Subjects", (string)null);
+                    b.HasIndex("LevelId");
+
+                    b.ToTable("Subjects");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -474,43 +453,32 @@ namespace Base.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Base.Domain.Entities.Attendence", b =>
                 {
-                    b.HasOne("Base.Domain.Entities.Lecture", "Lecture")
-                        .WithMany("Attendences")
-                        .HasForeignKey("LectureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Base.Domain.Entities.Student", "Student")
                         .WithMany("Attendences")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Lecture");
+                    b.HasOne("Base.Domain.Entities.Subject", "Subject")
+                        .WithMany("Attendences")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Student");
+
+                    b.Navigation("Subject");
                 });
 
             modelBuilder.Entity("Base.Domain.Entities.Doctor", b =>
                 {
                     b.HasOne("Base.Domain.Entities.Identity.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("Doctors")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
-                });
-
-            modelBuilder.Entity("Base.Domain.Entities.Lecture", b =>
-                {
-                    b.HasOne("Base.Domain.Entities.Subject", "Subject")
-                        .WithMany("Lectures")
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Subject");
                 });
 
             modelBuilder.Entity("Base.Domain.Entities.NFC_Card", b =>
@@ -527,7 +495,7 @@ namespace Base.Infrastructure.Data.Migrations
             modelBuilder.Entity("Base.Domain.Entities.Student", b =>
                 {
                     b.HasOne("Base.Domain.Entities.Identity.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("Students")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -565,9 +533,17 @@ namespace Base.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Base.Domain.Entities.Level", "Level")
+                        .WithMany("Subjects")
+                        .HasForeignKey("LevelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Department");
 
                     b.Navigation("Doctor");
+
+                    b.Navigation("Level");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -633,27 +609,30 @@ namespace Base.Infrastructure.Data.Migrations
                     b.Navigation("Subjects");
                 });
 
-            modelBuilder.Entity("Base.Domain.Entities.Lecture", b =>
+            modelBuilder.Entity("Base.Domain.Entities.Identity.ApplicationUser", b =>
                 {
-                    b.Navigation("Attendences");
+                    b.Navigation("Doctors");
+
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("Base.Domain.Entities.Level", b =>
                 {
                     b.Navigation("Students");
+
+                    b.Navigation("Subjects");
                 });
 
             modelBuilder.Entity("Base.Domain.Entities.Student", b =>
                 {
                     b.Navigation("Attendences");
 
-                    b.Navigation("NFC_Card")
-                        .IsRequired();
+                    b.Navigation("NFC_Card");
                 });
 
             modelBuilder.Entity("Base.Domain.Entities.Subject", b =>
                 {
-                    b.Navigation("Lectures");
+                    b.Navigation("Attendences");
                 });
 #pragma warning restore 612, 618
         }

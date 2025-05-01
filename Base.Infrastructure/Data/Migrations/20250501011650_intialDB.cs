@@ -215,7 +215,6 @@ namespace Base.Infrastructure.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    NFC_CardId = table.Column<int>(type: "int", nullable: false),
                     DepartmentId = table.Column<int>(type: "int", nullable: false),
                     LevelId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -251,6 +250,7 @@ namespace Base.Infrastructure.Data.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Samester = table.Column<int>(type: "int", nullable: false),
                     DoctorId = table.Column<int>(type: "int", nullable: false),
+                    LevelId = table.Column<int>(type: "int", nullable: false),
                     DepartmentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -266,6 +266,12 @@ namespace Base.Infrastructure.Data.Migrations
                         name: "FK_Subjects_Doctors_DoctorId",
                         column: x => x.DoctorId,
                         principalTable: "Doctors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Subjects_Levels_LevelId",
+                        column: x => x.LevelId,
+                        principalTable: "Levels",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -292,47 +298,26 @@ namespace Base.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Lectures",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Lecturedate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SubjectId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Lectures", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Lectures_Subjects_SubjectId",
-                        column: x => x.SubjectId,
-                        principalTable: "Subjects",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Attendences",
                 columns: table => new
                 {
                     StudentId = table.Column<int>(type: "int", nullable: false),
-                    LectureId = table.Column<int>(type: "int", nullable: false)
+                    SubjectId = table.Column<int>(type: "int", nullable: false),
+                    Count = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Attendences", x => new { x.StudentId, x.LectureId });
-                    table.ForeignKey(
-                        name: "FK_Attendences_Lectures_LectureId",
-                        column: x => x.LectureId,
-                        principalTable: "Lectures",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Attendences", x => new { x.StudentId, x.SubjectId });
                     table.ForeignKey(
                         name: "FK_Attendences_Students_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Students",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Attendences_Subjects_SubjectId",
+                        column: x => x.SubjectId,
+                        principalTable: "Subjects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -396,19 +381,14 @@ namespace Base.Infrastructure.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Attendences_LectureId",
+                name: "IX_Attendences_SubjectId",
                 table: "Attendences",
-                column: "LectureId");
+                column: "SubjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Doctors_ApplicationUserId",
                 table: "Doctors",
                 column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Lectures_SubjectId",
-                table: "Lectures",
-                column: "SubjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_NFC_Cards_StudentId",
@@ -440,6 +420,11 @@ namespace Base.Infrastructure.Data.Migrations
                 name: "IX_Subjects_DoctorId",
                 table: "Subjects",
                 column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Subjects_LevelId",
+                table: "Subjects",
+                column: "LevelId");
         }
 
         /// <inheritdoc />
@@ -470,22 +455,19 @@ namespace Base.Infrastructure.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Lectures");
+                name: "Subjects");
 
             migrationBuilder.DropTable(
                 name: "Students");
 
             migrationBuilder.DropTable(
-                name: "Subjects");
-
-            migrationBuilder.DropTable(
-                name: "Levels");
+                name: "Doctors");
 
             migrationBuilder.DropTable(
                 name: "Departments");
 
             migrationBuilder.DropTable(
-                name: "Doctors");
+                name: "Levels");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

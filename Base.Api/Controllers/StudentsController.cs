@@ -26,10 +26,10 @@ public class StudentsController(IStudentService studentService) : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> Get([FromRoute] int id)
+    [HttpGet("")]
+    public async Task<IActionResult> Get()
     {
-        var result = await _studentService.GetAsync(id);
+        var result = await _studentService.GetAsync(User.GetUserId());
 
         return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
     }

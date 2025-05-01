@@ -1,4 +1,5 @@
-﻿using Base.Application.Contracts.Users;
+﻿using Base.Application.Contracts.Subjects;
+using Base.Application.Contracts.Users;
 
 namespace Base.Application.Contracts.Doctor;
 public class DoctorResponse
@@ -7,7 +8,7 @@ public class DoctorResponse
 
     public UserResponse ApplicationUser { get; set; } = null!;
 
-    public List<Subject> Subjects { get; set; }
+    public List<SubjectResponse2> Subjects { get; set; }
 }
 public class DoctorResponseWithoutSubject
 {

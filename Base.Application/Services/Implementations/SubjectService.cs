@@ -8,14 +8,19 @@ public class SubjectService(ApplicationDbContext context) : ISubjectService
 
     public async Task<Result<List<SubjectResponse>>> GetAllAsync()
     {
-        var subjects = await _Context.Subjects.Include(x => x.Lectures).AsNoTracking().ProjectToType<SubjectResponse>().ToListAsync();
+        var subjects = await _Context.Subjects.AsNoTracking().ProjectToType<SubjectResponse>().ToListAsync();
 
         return Result.Success(subjects);
     }
 
     public async Task<Result<SubjectResponse>> GetAsync(int id)
     {
-        var subject = await _Context.Subjects.Where(x => x.Id == id).Include(x => x.Lectures).AsNoTracking().ProjectToType<SubjectResponse>().FirstOrDefaultAsync();
+        var subject = await _Context.Subjects
+            .Where(x => x.Id == id)
+            .Include(x => x.Attendences)
+            .AsNoTracking()
+            .ProjectToType<SubjectResponse>()
+            .FirstOrDefaultAsync();
         return subject is null
            ? Result.Failure<SubjectResponse>(SubjectError.NotFound)
            : Result.Success(subject);

@@ -12,7 +12,6 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Attendence> Attendences { get; set; } = null!;
     public DbSet<Department> Departments { get; set; } = null!;
     public DbSet<Doctor> Doctors { get; set; } = null!;
-    public DbSet<Lecture> Lectures { get; set; } = null!;
     public DbSet<Level> Levels { get; set; } = null!;
     public DbSet<NFC_Card> NFC_Cards { get; set; } = null!;
     public DbSet<Subject> Subjects { get; set; } = null!;

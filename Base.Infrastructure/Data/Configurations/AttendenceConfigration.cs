@@ -14,6 +14,6 @@ internal class AttendenceConfigration : IEntityTypeConfiguration<Attendence>
 {
     public void Configure(EntityTypeBuilder<Attendence> builder)
     {
-        builder.HasKey(x => new { x.StudentId, x.LectureId });
+        builder.HasKey(x => new { x.StudentId, x.SubjectId });
     }
 }

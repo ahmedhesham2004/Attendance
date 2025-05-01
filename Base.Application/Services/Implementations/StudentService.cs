@@ -44,8 +44,13 @@ public class StudentService(ApplicationDbContext context, UserManager<Applicatio
                 .ProjectToType<StudentResponse>()
                 .AsNoTracking()
                 .ToListAsync();
-    public async Task<Result<StudentResponse>> GetAsync(int studentId)
+    public async Task<Result<StudentResponse>> GetAsync(string userId)
     {
+        var studentId = await _context.Students
+            .Where(x => x.ApplicationUserId == userId)
+            .Select(x => x.Id)
+            .FirstOrDefaultAsync();
+
         var student = await _context.Students
             .Where(x => x.Id == studentId)
             .Include(x => x.ApplicationUser)

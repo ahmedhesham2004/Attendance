@@ -11,9 +11,11 @@ public class Subject
     public int DoctorId { get; set; }
     public Doctor Doctor { get; set; } = null!;
 
+    public int LevelId { get; set; }
+    public Level Level { get; set; } = null!;
+
     public int DepartmentId { get; set; }
     public Department Department { get; set; } = null!;
 
-    public ICollection<Lecture> Lectures { get; set; }
-
+    public ICollection<Attendence> Attendences { get; set; }
 }

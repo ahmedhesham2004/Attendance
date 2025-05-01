@@ -1,4 +1,5 @@
-﻿using Base.Application.Services.Interfaces;
+﻿using Base.Api.Extensions;
+using Base.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,11 +10,11 @@ public class AttendencesController(IAttendenceService attendenceService) : Contr
 {
     private readonly IAttendenceService _attendenceService = attendenceService;
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> Get([FromRoute] int id)
+    [HttpGet("")]
+    public async Task<IActionResult> GetAll()
     {
-        var result = await _studentService.GetAsync(id);
+        var result = await _attendenceService.GetAllAsync();
 
-        return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
+        return Ok(result);
     }
 }
