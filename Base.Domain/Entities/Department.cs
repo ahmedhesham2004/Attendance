@@ -10,4 +10,5 @@ public class Department
 
     public ICollection<Student> Students { get; set; }
     public ICollection<Subject> Subjects { get; set; }
+    public ICollection<DepartmentLevel> DepartmentLevels { get; set; }
 }
