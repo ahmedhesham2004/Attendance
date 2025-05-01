@@ -14,33 +14,33 @@ public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
     {
         var departments = new List<Department>
         {
-            new Department
+            new Department //1 2
             {
                 Id = 1,
-                Name = "TIS",
+                Name = "شعبه عامه",
             },
-            new Department
+            new Department // 1 2 3 4
             {
                 Id = 2,
-                Name = "BIS",
+                Name = "ادارة نظم تكنولوجيا المعلومات",
             },
-            new Department
+            new Department // 3 4 1 2
             {
-                Id = 1,
-                Name = "TIS",
+                Id = 3,
+                Name = "نظم معلومات الأعمال",
             },
-            new Department
+            new Department // 3 4 1 2
             {
-                Id = 1,
-                Name = "TIS",
+                Id = 4,
+                Name = "تكنولوجيا الادارة والاعمال",
             },
-            new Department
+            new Department //1 2 3 4
             {
-                Id = 1,
-                Name = "TIS",
-            },
+                Id = 5,
+                Name = "تكنولوجيا المحاسبة",
+            }
         };
 
-        //builder.HasData(departments);
+        builder.HasData(departments);
     }
 }
