@@ -5,6 +5,6 @@ public interface IAttendenceService
 {
 
     Task<IEnumerable<AttendenceResponse>> GetAllAsync();
-    //Task<Result<ICollection<SubjectAttendenceResponse>>> GetSubjectAttendenceAsync(int subjectId);
+    Task SeedAsync();
     
 }

@@ -17,4 +17,12 @@ public class AttendencesController(IAttendenceService attendenceService) : Contr
 
         return Ok(result);
     }
+
+    [HttpPost("")]
+    public async Task<IActionResult> Seed()
+    {
+        await _attendenceService.SeedAsync();
+
+        return Ok();
+    }
 }
