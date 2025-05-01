@@ -21,7 +21,7 @@ public class DepartmentService(ApplicationDbContext context) : IDepartmentServic
     {
         var level = await _Context.Departments
             .Where(x => x.Id == id)
-           .Include(x => x.Students)
+            .Include(x => x.Students)
             .Include(x => x.Subjects)
             .AsNoTracking()
             .ProjectToType<DepartmentResponse>()
