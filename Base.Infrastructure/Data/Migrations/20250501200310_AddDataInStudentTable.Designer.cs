@@ -4,6 +4,7 @@ using Base.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Base.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250501200310_AddDataInStudentTable")]
+    partial class AddDataInStudentTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,28 +27,20 @@ namespace Base.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Base.Domain.Entities.Attendence", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
 
-                    b.HasIndex("StudentId");
+                    b.HasKey("StudentId", "SubjectId");
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("Attendences", (string)null);
+                    b.ToTable("Attendences");
                 });
 
             modelBuilder.Entity("Base.Domain.Entities.Department", b =>
@@ -62,7 +57,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments", (string)null);
+                    b.ToTable("Departments");
 
                     b.HasData(
                         new
@@ -104,7 +99,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("DepartmentLevel", (string)null);
+                    b.ToTable("DepartmentLevel");
 
                     b.HasData(
                         new
@@ -215,7 +210,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Doctors", (string)null);
+                    b.ToTable("Doctors");
 
                     b.HasData(
                         new
@@ -1520,7 +1515,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Levels", (string)null);
+                    b.ToTable("Levels");
 
                     b.HasData(
                         new
@@ -1569,254 +1564,7 @@ namespace Base.Infrastructure.Data.Migrations
                     b.HasIndex("StudentId")
                         .IsUnique();
 
-                    b.ToTable("NFC_Cards", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Code = "1",
-                            ImageUrl = "CardImages/1.jpg",
-                            StudentId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Code = "2",
-                            ImageUrl = "CardImages/2.jpg",
-                            StudentId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Code = "3",
-                            ImageUrl = "CardImages/3.jpg",
-                            StudentId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Code = "4",
-                            ImageUrl = "CardImages/4.jpg",
-                            StudentId = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Code = "5",
-                            ImageUrl = "CardImages/5.jpg",
-                            StudentId = 5
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Code = "6",
-                            ImageUrl = "CardImages/6.jpg",
-                            StudentId = 6
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Code = "7",
-                            ImageUrl = "CardImages/7.jpg",
-                            StudentId = 7
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Code = "8",
-                            ImageUrl = "CardImages/8.jpg",
-                            StudentId = 8
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Code = "9",
-                            ImageUrl = "CardImages/9.jpg",
-                            StudentId = 9
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Code = "10",
-                            ImageUrl = "CardImages/10.jpg",
-                            StudentId = 10
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Code = "11",
-                            ImageUrl = "CardImages/11.jpg",
-                            StudentId = 11
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Code = "12",
-                            ImageUrl = "CardImages/12.jpg",
-                            StudentId = 12
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Code = "13",
-                            ImageUrl = "CardImages/13.jpg",
-                            StudentId = 13
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Code = "14",
-                            ImageUrl = "CardImages/14.jpg",
-                            StudentId = 14
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Code = "15",
-                            ImageUrl = "CardImages/15.jpg",
-                            StudentId = 15
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Code = "16",
-                            ImageUrl = "CardImages/16.jpg",
-                            StudentId = 16
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Code = "17",
-                            ImageUrl = "CardImages/17.jpg",
-                            StudentId = 17
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Code = "18",
-                            ImageUrl = "CardImages/18.jpg",
-                            StudentId = 18
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Code = "19",
-                            ImageUrl = "CardImages/19.jpg",
-                            StudentId = 19
-                        },
-                        new
-                        {
-                            Id = 20,
-                            Code = "20",
-                            ImageUrl = "CardImages/20.jpg",
-                            StudentId = 20
-                        },
-                        new
-                        {
-                            Id = 21,
-                            Code = "21",
-                            ImageUrl = "CardImages/21.jpg",
-                            StudentId = 21
-                        },
-                        new
-                        {
-                            Id = 22,
-                            Code = "22",
-                            ImageUrl = "CardImages/22.jpg",
-                            StudentId = 22
-                        },
-                        new
-                        {
-                            Id = 23,
-                            Code = "23",
-                            ImageUrl = "CardImages/23.jpg",
-                            StudentId = 23
-                        },
-                        new
-                        {
-                            Id = 24,
-                            Code = "24",
-                            ImageUrl = "CardImages/24.jpg",
-                            StudentId = 24
-                        },
-                        new
-                        {
-                            Id = 25,
-                            Code = "25",
-                            ImageUrl = "CardImages/25.jpg",
-                            StudentId = 25
-                        },
-                        new
-                        {
-                            Id = 26,
-                            Code = "26",
-                            ImageUrl = "CardImages/26.jpg",
-                            StudentId = 26
-                        },
-                        new
-                        {
-                            Id = 27,
-                            Code = "27",
-                            ImageUrl = "CardImages/27.jpg",
-                            StudentId = 27
-                        },
-                        new
-                        {
-                            Id = 28,
-                            Code = "28",
-                            ImageUrl = "CardImages/28.jpg",
-                            StudentId = 28
-                        },
-                        new
-                        {
-                            Id = 29,
-                            Code = "29",
-                            ImageUrl = "CardImages/29.jpg",
-                            StudentId = 29
-                        },
-                        new
-                        {
-                            Id = 30,
-                            Code = "30",
-                            ImageUrl = "CardImages/30.jpg",
-                            StudentId = 30
-                        },
-                        new
-                        {
-                            Id = 31,
-                            Code = "31",
-                            ImageUrl = "CardImages/31.jpg",
-                            StudentId = 31
-                        },
-                        new
-                        {
-                            Id = 32,
-                            Code = "32",
-                            ImageUrl = "CardImages/32.jpg",
-                            StudentId = 32
-                        },
-                        new
-                        {
-                            Id = 33,
-                            Code = "33",
-                            ImageUrl = "CardImages/33.jpg",
-                            StudentId = 33
-                        },
-                        new
-                        {
-                            Id = 34,
-                            Code = "34",
-                            ImageUrl = "CardImages/34.jpg",
-                            StudentId = 34
-                        },
-                        new
-                        {
-                            Id = 35,
-                            Code = "35",
-                            ImageUrl = "CardImages/35.jpg",
-                            StudentId = 35
-                        });
+                    b.ToTable("NFC_Cards");
                 });
 
             modelBuilder.Entity("Base.Domain.Entities.Student", b =>
@@ -1845,7 +1593,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasIndex("LevelId");
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
 
                     b.HasData(
                         new
@@ -2131,7 +1879,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasIndex("LevelId");
 
-                    b.ToTable("Subjects", (string)null);
+                    b.ToTable("Subjects");
 
                     b.HasData(
                         new
@@ -2799,181 +2547,6 @@ namespace Base.Infrastructure.Data.Migrations
                         {
                             UserId = "d01ef23g-4h5i-6j7k-8l9m-0n1o2p3q4r5s",
                             RoleId = "0191d311-2918-7f76-bd8a-0bdf740adff9"
-                        },
-                        new
-                        {
-                            UserId = "683211b1-1125-42a1-b148-a606a4ca4df3",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "df2ea217-2e82-48b9-9442-47556c1a9403",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "6b9b3e85-ce32-4944-9a46-601bb2b40000",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "fc4df06f-05c2-4751-96c1-8040f2761b7f",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "7c30ae16-67eb-4ff2-858f-70aa79aaa3c4",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "ce47a5ab-df14-416a-b500-9b544fa666a4",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "249aa6c5-d578-4517-8a42-48f24a7d959e",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "49a438ba-672d-41d5-97ba-5536ffbec2a6",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "bf2ee728-59af-45ec-9b70-e5f5e27eef8e",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "cb3cb7ca-1921-49fd-a11e-600b351b3df2",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "cb3cb7ca-1921-49fd-a11e-600b351b3df3",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "5d577849-97d1-4984-bf96-6fee7d08c8be",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "f89bca4a-8fc9-4259-a46d-22562907c27f",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "cb3cb7ca-1921-49fd-a11e-600b351b3df4",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "8766c317-1eaa-468a-b34d-59790c8eb915",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "a12bc34d-5e6f-7g8h-9i0j-1k2l3m4n5o6p",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "b23cd45e-6f7g-8h9i-0j1k-2l3m4n5o6p7q",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "c34de56f-7g8h-9i0j-1k2l-3m4n5o6p7q8r",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "d45ef67g-8h9i-0j1k-2l3m-4n5o6p7q8r9s",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "e56fg78h-9i0j-1k2l-3m4n-5o6p7q8r9s0t",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "f67gh89i-0j1k-2l3m-4n5o-6p7q8r9s0t1u",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "g78hi90j-1k2l-3m4n-5o6p-7q8r9s0t1u2v",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "h89ij01k-2l3m-4n5o-6p7q-8r9s0t1u2v3w",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "i90jk12l-3m4n-5o6p-7q8r-9s0t1u2v3w4x",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "j01kl23m-4n5o-6p7q-8r9s-0t1u2v3w4x5y",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "k12lm34n-5o6p-7q8r-9s0t-1u2v3w4x5y6z",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "l23mn45o-6p7q-8r9s-0t1u-2v3w4x5y6z7a",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "m34no56p-7q8r-9s0t-1u2v-3w4x5y6z7a8b",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "n45op67q-8r9s-0t1u-2v3w-4x5y6z7a8b9c",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "o56pq78r-9s0t-1u2v-3w4x-5y6z7a8b9c0d",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "p67qr89s-0t1u-2v3w-4x5y-6z7a8b9c0d1e",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "q78rs90t-1u2v-3w4x-5y6z-7a8b9c0d1e2f",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "r89st01u-2v3w-4x5y-6z7a-8b9c0d1e2f3g",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "s90tu12v-3w4x-5y6z-7a8b-9c0d1e2f3g4h",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
-                        },
-                        new
-                        {
-                            UserId = "t01uv23w-4x5y-6z7a-8b9c-0d1e2f3g4h5i",
-                            RoleId = "0191d311-2918-7f76-bd8a-0bdf740adfA9"
                         });
                 });
 
