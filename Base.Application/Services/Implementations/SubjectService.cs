@@ -25,16 +25,26 @@ public class SubjectService(ApplicationDbContext context) : ISubjectService
            ? Result.Failure<SubjectResponse>(SubjectError.NotFound)
            : Result.Success(subject);
     }
-    public async Task<Result<SubjectResponse>> CreateAsync(SubjectRequest request)
+    public async Task<Result<SubjectResponse2>> CreateAsync(SubjectRequest request)
     {
         if (await _Context.Subjects.AnyAsync(x => x.Name == request.Name))
-            return Result.Failure<SubjectResponse>(SubjectError.Duplicated);
+            return Result.Failure<SubjectResponse2>(SubjectError.Duplicated);
+
+        if(!await _Context.Doctors.AnyAsync(x=>x.Id ==request.DoctorId))
+            return Result.Failure<SubjectResponse2>(DoctorError.NotFound);
+
+        if (!await _Context.Levels.AnyAsync(x => x.Id == request.LevelId))
+            return Result.Failure<SubjectResponse2>(LevelError.NotFound);
+
+        if (!await _Context.Departments.AnyAsync(x => x.Id == request.DepartmentId))
+            return Result.Failure<SubjectResponse2>(DepartmentError.NotFound);
+
         var subject = request.Adapt<Subject>();
 
         await _Context.Subjects.AddAsync(subject);
         await _Context.SaveChangesAsync();
 
-        return Result.Success(subject.Adapt<SubjectResponse>());
+        return Result.Success(subject.Adapt<SubjectResponse2>());
     }
 
     public async Task<Result> UpdateAsync(int id, SubjectRequest request)

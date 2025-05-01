@@ -42,6 +42,7 @@ public class SubjectsController(ISubjectService subjectService) : ControllerBase
         var result = await _SubjectService.CreateAsync( request);
         return result.IsSuccess
            ? CreatedAtAction(nameof(Get), new { id = result.Value.Id }, result.Value)
+          //?Ok(result.Value)
            : result.ToProblem();
     }
     [HttpPut("{id}")]

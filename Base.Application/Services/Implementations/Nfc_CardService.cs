@@ -36,8 +36,8 @@ public class Nfc_CardService(IWebHostEnvironment webHostEnvironment, Application
             || await _Context.NFC_Cards.Where(x => x.StudentId == request.StudentId).AnyAsync())
             return Result.Failure<Nfc_CardResponse>(Nfc_CardError.DublicateCard);
 
-        //if (await _Context.NFC_Cards.Where(x => x.StudentId == request.StudentId).AnyAsync())
-        //    return Result.Failure<Nfc_CardResponse>(Nfc_CardError.DublicateCard);
+        if (!await _Context.Students.Where(x => x.Id == request.StudentId).AnyAsync())
+            return Result.Failure<Nfc_CardResponse>(StudentErrors.StudentNotFound);
 
         // Process image file
         string filename = request.ImageUrl.FileName;

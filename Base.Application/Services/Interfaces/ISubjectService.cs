@@ -7,7 +7,7 @@ public interface ISubjectService
     Task<Result<List<SubjectResponse>>> GetAllAsync();
     Task<Result<SubjectResponse>> GetAsync(int id);
 
-    Task<Result<SubjectResponse>> CreateAsync(SubjectRequest request);
+    Task<Result<SubjectResponse2>> CreateAsync(SubjectRequest request);
     Task<Result> UpdateAsync(int id, SubjectRequest request);
     Task<Result> DeleteAsync(int id);
 }
