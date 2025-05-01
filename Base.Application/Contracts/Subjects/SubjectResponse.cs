@@ -14,11 +14,3 @@ public class SubjectResponse
     public string DoctorName { get; set; }
     public ICollection<AttendenceResponse> Attendences { get; set; }
 }
-
-public class SubjectResponse2
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public int Samester { get; set; }
-    public DepartmentResponse Department { get; set; } = null!;
-}

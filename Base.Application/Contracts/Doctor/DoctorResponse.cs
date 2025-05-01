@@ -8,7 +8,7 @@ public class DoctorResponse
 
     public UserResponse ApplicationUser { get; set; } = null!;
 
-    public List<SubjectResponse2> Subjects { get; set; }
+    public List<SubjectResponse> Subjects { get; set; }
 }
 public class DoctorResponseWithoutSubject
 {
