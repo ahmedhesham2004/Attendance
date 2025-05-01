@@ -10,10 +10,22 @@ using System.Threading.Tasks;
 using Base.Domain.Entities;
 
 namespace Base.Infrastructure.Data.Configurations;
-internal class AttendenceConfigration : IEntityTypeConfiguration<Attendence>
+public class AttendenceConfigration : IEntityTypeConfiguration<Attendence>
 {
     public void Configure(EntityTypeBuilder<Attendence> builder)
     {
         builder.HasKey(x => new { x.StudentId, x.SubjectId });
+
+        var attendences = new List<Attendence>
+        {
+            new Attendence
+            {
+                Count = 0,
+                StudentId = 1,
+                SubjectId = 1
+            }
+        };
+
+        //builder.HasData(attendences);
     }
 }
