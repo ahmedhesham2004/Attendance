@@ -1,4 +1,5 @@
 using Base.Application.Contracts.Attendences;
+using Base.Application.Contracts.Levels;
 using Base.Application.Contracts.Nfc_Cards;
 using Base.Application.Contracts.Students;
 using Base.Application.Contracts.Users;
@@ -25,5 +26,14 @@ public class MappingProfile : IRegister
           .Map(des => des.Count, src => src.Count)
           .Map(des => des.SubjectName, src => src.Subject.Name)
           .Map(des => des.StudentName, src => src.Student.ApplicationUser.FirstName+' '+src.Student.ApplicationUser.LastName);
+
+        config.NewConfig<Level, LevelWithDepartments>()
+            .Map(des => des.Departments, src => src.DepartmentLevels.Select(x=>x.Department));
+
+        config.NewConfig<Level, LevelWithStudents>()
+            .Map(des => des.StudentsName, src => src.Students.Select(x => $"{x.ApplicationUser.FirstName} {x.ApplicationUser.LastName}"));
+
+        config.NewConfig<Level, LevelWithSubjects>()
+            .Map(des => des.SubjectsName, src => src.Subjects.Select(x => $"{x.Name}"));
     }
 }
