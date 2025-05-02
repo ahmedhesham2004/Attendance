@@ -1,5 +1,6 @@
 ﻿using Base.Application.Contracts.Doctor;
 using Base.Application.Contracts.Subjects;
+using Microsoft.EntityFrameworkCore;
 
 namespace Base.Application.Services.Implementations;
 public class SubjectService(ApplicationDbContext context) : ISubjectService
@@ -43,6 +44,26 @@ public class SubjectService(ApplicationDbContext context) : ISubjectService
         var subject = request.Adapt<Subject>();
 
         await _Context.Subjects.AddAsync(subject);
+        await _Context.SaveChangesAsync();
+
+        var students = await _Context.Students.ToListAsync();
+        var attendences = new List<Attendence>();
+
+        foreach (var student in students)
+        {
+            if (student.LevelId == subject.LevelId &&
+                student.DepartmentId == subject.DepartmentId)
+            {
+                attendences.Add(new Attendence
+                {
+                    StudentId = student.Id,
+                    SubjectId = subject.Id,
+                    Count = 0
+                });
+            }
+        }
+
+        await _Context.Attendences.AddRangeAsync(attendences);
         await _Context.SaveChangesAsync();
 
         return Result.Success(subject.Adapt<SubjectResponse2>());
