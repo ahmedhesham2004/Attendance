@@ -12,41 +12,25 @@ using static Base.Domain.Consts.DefaultRoles;
 using System.Reflection.Emit;
 
 namespace Base.Infrastructure.Data.Configurations;
-public class AttendenceConfigration(ApplicationDbContext context) : IEntityTypeConfiguration<Attendence>
+public class AttendenceConfigration : IEntityTypeConfiguration<Attendence>
 {
-    private readonly ApplicationDbContext _context = context;
 
     public void Configure(EntityTypeBuilder<Attendence> builder)
     {
         builder.HasKey(x => x.Id);
-       
-        var students = _context.Students.ToList();
-        var subjects = _context.Subjects.ToList();
 
-        //var attendences = new List<Attendence>();
+        builder
+        .HasOne(a => a.Student)
+        .WithMany(s => s.Attendences)
+        .HasForeignKey(a => a.StudentId)
+        .OnDelete(DeleteBehavior.Cascade);
 
-        //var z = 1;
-        //foreach (var student in students)
-        //{
-        //    foreach (var subject in subjects)
-        //    {
-        //        var x = student.LevelId;
-        //        var x2 = subject.LevelId;
-        //        var y = student.DepartmentId;
-        //        var y2 = subject.DepartmentId;
-        //        if (x == x2 && y == y2)
-        //        {
-        //            attendences.Add(new Attendence
-        //            {
-        //                Id = z++,
-        //                StudentId = student.Id,
-        //                SubjectId = subject.Id,
-        //                Count = 0 // يمكن تغيير القيمة حسب الحاجة
-        //            });
-        //        } 
-        //    }
-        //};
+        builder
+        .HasOne(a => a.Subject)
+        .WithMany(s => s.Attendences)
+        .HasForeignKey(a => a.SubjectId)
+        .OnDelete(DeleteBehavior.Cascade);
 
-        //builder.HasData(attendences);
+
     }
 }

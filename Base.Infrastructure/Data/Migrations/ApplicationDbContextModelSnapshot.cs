@@ -45,7 +45,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("Attendences", (string)null);
+                    b.ToTable("Attendences");
                 });
 
             modelBuilder.Entity("Base.Domain.Entities.Department", b =>
@@ -62,7 +62,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments", (string)null);
+                    b.ToTable("Departments");
 
                     b.HasData(
                         new
@@ -104,7 +104,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("DepartmentLevel", (string)null);
+                    b.ToTable("DepartmentLevel");
 
                     b.HasData(
                         new
@@ -215,7 +215,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Doctors", (string)null);
+                    b.ToTable("Doctors");
 
                     b.HasData(
                         new
@@ -1520,7 +1520,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Levels", (string)null);
+                    b.ToTable("Levels");
 
                     b.HasData(
                         new
@@ -1569,7 +1569,7 @@ namespace Base.Infrastructure.Data.Migrations
                     b.HasIndex("StudentId")
                         .IsUnique();
 
-                    b.ToTable("NFC_Cards", (string)null);
+                    b.ToTable("NFC_Cards");
 
                     b.HasData(
                         new
@@ -1845,7 +1845,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasIndex("LevelId");
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
 
                     b.HasData(
                         new
@@ -2107,13 +2107,13 @@ namespace Base.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DoctorId")
+                    b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LevelId")
+                    b.Property<int?>("LevelId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -2131,7 +2131,7 @@ namespace Base.Infrastructure.Data.Migrations
 
                     b.HasIndex("LevelId");
 
-                    b.ToTable("Subjects", (string)null);
+                    b.ToTable("Subjects");
 
                     b.HasData(
                         new
@@ -3087,21 +3087,15 @@ namespace Base.Infrastructure.Data.Migrations
                 {
                     b.HasOne("Base.Domain.Entities.Department", "Department")
                         .WithMany("Subjects")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DepartmentId");
 
                     b.HasOne("Base.Domain.Entities.Doctor", "Doctor")
                         .WithMany("Subjects")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DoctorId");
 
                     b.HasOne("Base.Domain.Entities.Level", "Level")
                         .WithMany("Subjects")
-                        .HasForeignKey("LevelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LevelId");
 
                     b.Navigation("Department");
 

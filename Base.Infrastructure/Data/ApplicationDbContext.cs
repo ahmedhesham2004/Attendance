@@ -26,6 +26,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         .WithOne(c => c.Student)
         .HasForeignKey<NFC_Card>(c => c.StudentId);
 
+       
         base.OnModelCreating(modelBuilder);
     }
 }

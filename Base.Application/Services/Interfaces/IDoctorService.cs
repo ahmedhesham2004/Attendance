@@ -5,8 +5,6 @@ public interface IDoctorService
 {
     Task<Result<List<DoctorResponse>>> GetAllAsync();
     Task<Result<DoctorResponse>> GetAsync(string userId);
-
     Task<Result<DoctorResponse>> CreateAsync(DoctorRequest request);
-    Task<Result> UpdateAsync(int id, DoctorRequest request);
     Task<Result> DeleteAsync(int id);
 }

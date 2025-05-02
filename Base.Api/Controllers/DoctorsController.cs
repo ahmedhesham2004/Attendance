@@ -43,16 +43,6 @@ public class DoctorsController(IDoctorService doctorService) : ControllerBase
            ? CreatedAtAction(nameof(Get), new { id = result.Value.Id }, result.Value)
            : result.ToProblem();
     }
-    [HttpPut("{id}")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Update([FromRoute] int id, DoctorRequest request)
-    {
-        var result = await _DoctorService.UpdateAsync(id, request);
-
-        return result.IsSuccess ? NoContent() : result.ToProblem();
-    }
-
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

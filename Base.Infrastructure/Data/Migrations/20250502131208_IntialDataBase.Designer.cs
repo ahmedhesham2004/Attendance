@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Base.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250501200925_AddDataInUserRoleV2Table")]
-    partial class AddDataInUserRoleV2Table
+    [Migration("20250502131208_IntialDataBase")]
+    partial class IntialDataBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,16 +27,24 @@ namespace Base.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Base.Domain.Entities.Attendence", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("StudentId", "SubjectId");
+                    b.HasIndex("StudentId");
 
                     b.HasIndex("SubjectId");
 
@@ -1565,6 +1573,253 @@ namespace Base.Infrastructure.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("NFC_Cards");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "1",
+                            ImageUrl = "CardImages/1.jpg",
+                            StudentId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "2",
+                            ImageUrl = "CardImages/2.jpg",
+                            StudentId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "3",
+                            ImageUrl = "CardImages/3.jpg",
+                            StudentId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Code = "4",
+                            ImageUrl = "CardImages/4.jpg",
+                            StudentId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Code = "5",
+                            ImageUrl = "CardImages/5.jpg",
+                            StudentId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Code = "6",
+                            ImageUrl = "CardImages/6.jpg",
+                            StudentId = 6
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Code = "7",
+                            ImageUrl = "CardImages/7.jpg",
+                            StudentId = 7
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Code = "8",
+                            ImageUrl = "CardImages/8.jpg",
+                            StudentId = 8
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Code = "9",
+                            ImageUrl = "CardImages/9.jpg",
+                            StudentId = 9
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Code = "10",
+                            ImageUrl = "CardImages/10.jpg",
+                            StudentId = 10
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Code = "11",
+                            ImageUrl = "CardImages/11.jpg",
+                            StudentId = 11
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Code = "12",
+                            ImageUrl = "CardImages/12.jpg",
+                            StudentId = 12
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Code = "13",
+                            ImageUrl = "CardImages/13.jpg",
+                            StudentId = 13
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Code = "14",
+                            ImageUrl = "CardImages/14.jpg",
+                            StudentId = 14
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Code = "15",
+                            ImageUrl = "CardImages/15.jpg",
+                            StudentId = 15
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Code = "16",
+                            ImageUrl = "CardImages/16.jpg",
+                            StudentId = 16
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Code = "17",
+                            ImageUrl = "CardImages/17.jpg",
+                            StudentId = 17
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Code = "18",
+                            ImageUrl = "CardImages/18.jpg",
+                            StudentId = 18
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Code = "19",
+                            ImageUrl = "CardImages/19.jpg",
+                            StudentId = 19
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Code = "20",
+                            ImageUrl = "CardImages/20.jpg",
+                            StudentId = 20
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Code = "21",
+                            ImageUrl = "CardImages/21.jpg",
+                            StudentId = 21
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Code = "22",
+                            ImageUrl = "CardImages/22.jpg",
+                            StudentId = 22
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Code = "23",
+                            ImageUrl = "CardImages/23.jpg",
+                            StudentId = 23
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Code = "24",
+                            ImageUrl = "CardImages/24.jpg",
+                            StudentId = 24
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Code = "25",
+                            ImageUrl = "CardImages/25.jpg",
+                            StudentId = 25
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Code = "26",
+                            ImageUrl = "CardImages/26.jpg",
+                            StudentId = 26
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Code = "27",
+                            ImageUrl = "CardImages/27.jpg",
+                            StudentId = 27
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Code = "28",
+                            ImageUrl = "CardImages/28.jpg",
+                            StudentId = 28
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Code = "29",
+                            ImageUrl = "CardImages/29.jpg",
+                            StudentId = 29
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Code = "30",
+                            ImageUrl = "CardImages/30.jpg",
+                            StudentId = 30
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Code = "31",
+                            ImageUrl = "CardImages/31.jpg",
+                            StudentId = 31
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Code = "32",
+                            ImageUrl = "CardImages/32.jpg",
+                            StudentId = 32
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Code = "33",
+                            ImageUrl = "CardImages/33.jpg",
+                            StudentId = 33
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Code = "34",
+                            ImageUrl = "CardImages/34.jpg",
+                            StudentId = 34
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Code = "35",
+                            ImageUrl = "CardImages/35.jpg",
+                            StudentId = 35
+                        });
                 });
 
             modelBuilder.Entity("Base.Domain.Entities.Student", b =>
@@ -1855,13 +2110,13 @@ namespace Base.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DoctorId")
+                    b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LevelId")
+                    b.Property<int?>("LevelId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -2835,21 +3090,15 @@ namespace Base.Infrastructure.Data.Migrations
                 {
                     b.HasOne("Base.Domain.Entities.Department", "Department")
                         .WithMany("Subjects")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DepartmentId");
 
                     b.HasOne("Base.Domain.Entities.Doctor", "Doctor")
                         .WithMany("Subjects")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DoctorId");
 
                     b.HasOne("Base.Domain.Entities.Level", "Level")
                         .WithMany("Subjects")
-                        .HasForeignKey("LevelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LevelId");
 
                     b.Navigation("Department");
 

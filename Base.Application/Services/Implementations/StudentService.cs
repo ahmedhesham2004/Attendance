@@ -87,7 +87,7 @@ public class StudentService(ApplicationDbContext context, UserManager<Applicatio
         if (student is not null)
         {
             var role = await _userManager.GetRolesAsync(await _context.ApplicationUsers.Where(x => x.Id == userId).FirstAsync());
-            student.ApplicationUser.Role = role;
+            student.ApplicationUser.Roles = role;
         }  
 
         return student is null ? Result.Failure<StudentResponse>(StudentErrors.StudentNotFound) : Result.Success(student);

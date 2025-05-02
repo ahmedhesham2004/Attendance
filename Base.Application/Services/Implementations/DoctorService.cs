@@ -46,17 +46,6 @@ public class DoctorService(ApplicationDbContext context, UserManager<Application
 
         return Result.Success(doc.Adapt<DoctorResponse>());
     }
-    public async Task<Result> UpdateAsync(int id, DoctorRequest request)
-    {
-        if (await _Context.Doctors.FindAsync(id) is not { } doc)
-            return Result.Failure<DoctorResponse>(DoctorError.NotFound);
-
-        doc = request.Adapt(doc);
-        await _Context.SaveChangesAsync();
-
-        return Result.Success();
-
-    }
     public async Task<Result> DeleteAsync(int id)
     {
         if (await _Context.Doctors.FindAsync(id) is not  { } doc)
