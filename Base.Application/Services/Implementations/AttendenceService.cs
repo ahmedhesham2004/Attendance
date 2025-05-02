@@ -24,6 +24,7 @@ public class AttendenceService(ApplicationDbContext context) : IAttendenceServic
             var students = await _context.Students.ToListAsync();
             var subjects = await _context.Subjects.ToListAsync();
             var attendences = new List<Attendence>();
+            var z = 0;
             foreach (var student in students)
             {
                 foreach (var subject in subjects)
@@ -35,8 +36,9 @@ public class AttendenceService(ApplicationDbContext context) : IAttendenceServic
                         {
                             StudentId = student.Id,
                             SubjectId = subject.Id,
-                            Count = 0
+                            Count = z++
                         });
+                        if (z == 7) z = 0;
                     }
                 }
             }
