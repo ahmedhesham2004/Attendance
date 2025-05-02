@@ -8,7 +8,7 @@ public class SubjectService(ApplicationDbContext context) : ISubjectService
 
     public async Task<Result<List<SubjectResponse>>> GetAllAsync()
     {
-        var subjects = await _Context.Subjects.AsNoTracking().ProjectToType<SubjectResponse>().ToListAsync();
+        var subjects = await _Context.Subjects.Include(x=>x.Attendences).AsNoTracking().ProjectToType<SubjectResponse>().ToListAsync();
 
         return Result.Success(subjects);
     }
@@ -21,6 +21,7 @@ public class SubjectService(ApplicationDbContext context) : ISubjectService
             .AsNoTracking()
             .ProjectToType<SubjectResponse>()
             .FirstOrDefaultAsync();
+
         return subject is null
            ? Result.Failure<SubjectResponse>(SubjectError.NotFound)
            : Result.Success(subject);
