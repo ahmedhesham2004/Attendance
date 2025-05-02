@@ -92,33 +92,6 @@ public class StudentService(ApplicationDbContext context, UserManager<Applicatio
 
         return student is null ? Result.Failure<StudentResponse>(StudentErrors.StudentNotFound) : Result.Success(student);
     }
-    public async Task<Result<AddStudentResponse>> UpdateAsync(int studentId, StudentRequest request)
-    {
-        if (await _context.Students.FindAsync(studentId) is not { } student)
-            return Result.Failure<AddStudentResponse>(StudentErrors.StudentNotFound);
-
-        var isExstingUserId = await _context.ApplicationUsers.AnyAsync(x => x.Id == request.ApplicationUserId);
-        if (!isExstingUserId)
-            return Result.Failure<AddStudentResponse>(UserErrors.UserNotFound);
-
-        var isExstingLevelId = await _context.Levels.AnyAsync(x => x.Id == request.LevelId);
-        if (!isExstingLevelId)
-            return Result.Failure<AddStudentResponse>(LevelError.NotFound);
-
-        var isExstingDepartmentId = await _context.Departments.AnyAsync(x => x.Id == request.DepartmentId);
-        if (!isExstingDepartmentId)
-            return Result.Failure<AddStudentResponse>(DepartmentError.NotFound);
-
-        var UserIdUsed = await _context.Students.AnyAsync(x => x.ApplicationUserId == request.ApplicationUserId && x.Id != studentId);
-        if (UserIdUsed)
-            return Result.Failure<AddStudentResponse>(StudentErrors.DublicatedUserId);
-
-
-        student = request.Adapt(student);
-        await _context.SaveChangesAsync();
-
-        return Result.Success(student.Adapt<AddStudentResponse>());
-    }
     public async Task<Result> DeleteAsync(int studentId)
     {
         var isExstingStudent = await _context.Students.AnyAsync(x => x.Id == studentId);

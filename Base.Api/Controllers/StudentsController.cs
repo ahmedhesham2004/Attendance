@@ -34,14 +34,6 @@ public class StudentsController(IStudentService studentService) : ControllerBase
         return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update([FromRoute] int id, [FromBody] StudentRequest request)
-    {
-        var result = await _studentService.UpdateAsync(id, request);
-
-        return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
-    }
-
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
