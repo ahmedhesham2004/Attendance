@@ -22,7 +22,7 @@ public class SubjectConfiguration : IEntityTypeConfiguration<Subject>
                 Id = 1,
                 Name = "مبادئ اقتصاد 1",
                 Samester = 1,
-                Code = "1",
+                Code = "E3576909",
                 DoctorId = 1,
                 LevelId = 1,
                 DepartmentId = 1,

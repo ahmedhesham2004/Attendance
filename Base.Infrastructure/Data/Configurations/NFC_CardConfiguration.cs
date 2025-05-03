@@ -60,7 +60,7 @@ public class NFC_CardConfiguration : IEntityTypeConfiguration<NFC_Card>
             new NFC_Card
             {
                 Id = 7,
-                Code = "7",
+                Code = "C3345325",
                 ImageUrl = "CardImages/7.jpg",
                 StudentId = 7
             },
