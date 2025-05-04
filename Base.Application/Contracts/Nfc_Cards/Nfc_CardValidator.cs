@@ -13,8 +13,7 @@ public class Nfc_CardValidator:AbstractValidator<Nfc_CardRequest>
 
         RuleFor(x => x.ImageUrl)
            .SetValidator(new FileSizeValidator())
-           .SetValidator(new BlockedSignaturesValidator())
-           .SetValidator(new FileNameValidator());
+           .SetValidator(new BlockedSignaturesValidator());
 
         RuleFor(x => x.ImageUrl)
             .Must((request, context) =>
