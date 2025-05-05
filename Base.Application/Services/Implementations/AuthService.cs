@@ -29,7 +29,8 @@ public class AuthService(
             var userRoles = await _userManager.GetRolesAsync(user);
             var jwtResult = _jwtProvider.GenerateToken(user, userRoles);
 
-            var response = new AuthResponse(user.Id, user.Email!, user.FirstName, user.LastName, jwtResult.token, jwtResult.expiresIn);
+
+            var response = new AuthResponse(user.Id, user.Email!, user.FirstName, user.LastName, jwtResult.token, jwtResult.expiresIn, userRoles);
 
             return Result.Success(response);
         }

@@ -5,7 +5,8 @@ public record AuthResponse(
     string FirstName,
     string LastName,
     string Token,
-    int ExpiresIn
+    int ExpiresIn,
+    IEnumerable<string> Roles
 );
 
 public record AuthWhithOutTokenAndExpiresInResponse(
