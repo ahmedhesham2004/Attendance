@@ -164,7 +164,7 @@ public class AuthService(
         );
 
         BackgroundJob.Enqueue(() =>
-            _emailSender.SendEmailAsync(user.Email!, "✅ Base : Email Confirmation", emailBody)
+            _emailSender.SendEmailAsync(user.Email!, "✅ Attendences : Email Confirmation", emailBody)
         );
 
         await Task.CompletedTask;
