@@ -8,6 +8,7 @@ public class Subject
     public string Name { get; set; }
     public int Samester { get; set; }
     public string Code { get; set; }
+    public int? IsClosed { get; set; } = 0;
 
     public int? DoctorId { get; set; }
     public Doctor Doctor { get; set; } = null!;
